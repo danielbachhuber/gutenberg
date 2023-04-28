@@ -77,7 +77,7 @@ async function checkSizes( media ) {
 	const srcset = media?.srcset;
 	const parsedSizes = parseSizes( sizes );
 	const parsedSrcset = parseSrcset( srcset );
-	const isValid = true;
+	let isValid = true;
 	const reasons = [];
 	const { select } = wp.data;
 	const selectedBlock = select( 'core/block-editor' ).getSelectedBlock();
