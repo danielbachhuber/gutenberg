@@ -28,6 +28,7 @@ import { store as noticesStore } from '@wordpress/notices';
  * Internal dependencies
  */
 import Image from './image';
+import checkSizes from './check-sizes';
 
 /**
  * Module constants
@@ -242,6 +243,12 @@ export function ImageEdit( {
 			...mediaAttributes,
 			...additionalAttributes,
 			linkDestination,
+		} );
+
+		checkSizes( media ).then( ( { isValid, message } ) => {
+			if ( ! isValid ) {
+				createErrorNotice( message, { type: 'snackbar' } );
+			}
 		} );
 	}
 
