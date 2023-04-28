@@ -44,13 +44,6 @@ function parseSizes( sizes ) {
 		} );
 }
 
-function matchMedia( media ) {
-	if ( typeof window === 'undefined' ) {
-		return false;
-	}
-	return window.matchMedia( media ).matches;
-}
-
 // WordPress functions
 async function fetchCustomImageSizes( attachmentId ) {
 	try {
