@@ -11,6 +11,7 @@ import { useIsSiteEditorLoading } from './hooks';
 import Editor from '../editor';
 import PagePages from '../page-pages';
 import PageCategories from '../page-categories';
+import PageCategory from '../page-category';
 import PagePatterns from '../page-patterns';
 import PageTemplatesTemplateParts from '../page-templates-template-parts';
 
@@ -24,7 +25,16 @@ const { useLocation } = unlock( routerPrivateApis );
 export default function useLayoutAreas() {
 	const isSiteEditorLoading = useIsSiteEditorLoading();
 	const { params } = useLocation();
-	const { postType, postId, path, layout, isCustom, canvas } = params ?? {};
+	const {
+		postType,
+		postId,
+		path,
+		layout,
+		isCustom,
+		canvas,
+		taxonomy,
+		termId,
+	} = params ?? {};
 
 	// Note: Since "sidebar" is not yet supported here,
 	// returning undefined from "mobile" means show the sidebar.
@@ -71,6 +81,22 @@ export default function useLayoutAreas() {
 					<Editor isLoading={ isSiteEditorLoading } />
 				),
 				mobile: <PageCategories />,
+			},
+			widths: {
+				content: isListLayout ? 380 : undefined,
+			},
+		};
+	}
+
+	// Templates
+	if ( taxonomy && termId ) {
+		return {
+			areas: {
+				content: <PageCategory />,
+				preview: isListLayout && (
+					<Editor isLoading={ isSiteEditorLoading } />
+				),
+				mobile: <PageCategory />,
 			},
 			widths: {
 				content: isListLayout ? 380 : undefined,

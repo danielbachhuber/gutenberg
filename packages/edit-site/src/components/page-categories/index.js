@@ -92,16 +92,10 @@ function Title( { item, viewType } ) {
 	}
 	const linkProps = {
 		params: {
-			postId: item.id,
-			postType: item.type,
-			canvas: 'edit',
+			taxonomy: 'category',
+			termId: item.id,
 		},
 	};
-	if ( item.type === TEMPLATE_PART_POST_TYPE ) {
-		linkProps.state = {
-			backPath: '/wp_template_part/all',
-		};
-	}
 	return (
 		<Link { ...linkProps }>
 			{ decodeEntities( item.name ) || __( '(no title)' ) }
@@ -116,9 +110,8 @@ function Preview( { item, viewType } ) {
 		return parse( item.content.raw );
 	}, [ item.content.raw ] );
 	const { onClick } = useLink( {
-		postId: item.id,
-		postType: item.type,
-		canvas: 'edit',
+		taxonomy: 'category',
+		termId: item.id,
 	} );
 
 	const isEmpty = ! blocks?.length;
