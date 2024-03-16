@@ -10,6 +10,7 @@ import { unlock } from '../../lock-unlock';
 import { useIsSiteEditorLoading } from './hooks';
 import Editor from '../editor';
 import PagePages from '../page-pages';
+import PageCategories from '../page-categories';
 import PagePatterns from '../page-patterns';
 import PageTemplatesTemplateParts from '../page-templates-template-parts';
 
@@ -54,6 +55,22 @@ export default function useLayoutAreas() {
 				preview: isListLayout && (
 					<Editor isLoading={ isSiteEditorLoading } />
 				),
+			},
+			widths: {
+				content: isListLayout ? 380 : undefined,
+			},
+		};
+	}
+
+	// Templates
+	if ( path === '/categories' ) {
+		return {
+			areas: {
+				content: <PageCategories />,
+				preview: isListLayout && (
+					<Editor isLoading={ isSiteEditorLoading } />
+				),
+				mobile: <PageCategories />,
 			},
 			widths: {
 				content: isListLayout ? 380 : undefined,

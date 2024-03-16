@@ -7,7 +7,14 @@ import {
 	__experimentalUseNavigator as useNavigator,
 } from '@wordpress/components';
 import { __ } from '@wordpress/i18n';
-import { layout, symbol, navigation, styles, page } from '@wordpress/icons';
+import {
+	layout,
+	symbol,
+	navigation,
+	styles,
+	page,
+	category,
+} from '@wordpress/icons';
 import { useDispatch } from '@wordpress/data';
 
 import { useEffect } from '@wordpress/element';
@@ -65,6 +72,14 @@ export default function SidebarNavigationScreenMain() {
 							icon={ page }
 						>
 							{ __( 'Pages' ) }
+						</NavigatorButton>
+						<NavigatorButton
+							as={ SidebarNavigationItem }
+							path="/categories"
+							withChevron
+							icon={ category }
+						>
+							{ __( 'Categories' ) }
 						</NavigatorButton>
 						<NavigatorButton
 							as={ SidebarNavigationItem }
