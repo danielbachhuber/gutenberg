@@ -92,7 +92,7 @@ function Title( { item, viewType } ) {
 	}
 	const linkProps = {
 		params: {
-			taxonomy: 'category',
+			path: '/category',
 			termId: item.id,
 		},
 	};

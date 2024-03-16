@@ -32,6 +32,8 @@ import SidebarNavigationScreenTemplatesBrowse from '../sidebar-navigation-screen
 import SaveHub from '../save-hub';
 import { unlock } from '../../lock-unlock';
 import SidebarNavigationScreenPages from '../sidebar-navigation-screen-pages';
+import SidebarNavigationScreenCategories from '../sidebar-navigation-screen-categories';
+import SidebarNavigationScreenCategory from '../sidebar-navigation-screen-category';
 import SidebarNavigationScreen from '../sidebar-navigation-screen';
 import DataViewsSidebarContent from '../sidebar-dataviews';
 import SidebarNavigationScreenPage from '../sidebar-navigation-screen-page';
@@ -77,6 +79,12 @@ function SidebarScreens() {
 					content={ <DataViewsSidebarContent /> }
 					backPath="/page"
 				/>
+			</SidebarScreenWrapper>
+			<SidebarScreenWrapper path="/categories">
+				<SidebarNavigationScreenCategories />
+			</SidebarScreenWrapper>
+			<SidebarScreenWrapper path="/category">
+				<SidebarNavigationScreenCategory backPath="/categories" />
 			</SidebarScreenWrapper>
 			<SidebarScreenWrapper path="/page/:postId">
 				<SidebarNavigationScreenPage />

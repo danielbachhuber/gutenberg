@@ -89,7 +89,7 @@ export default function useLayoutAreas() {
 	}
 
 	// Templates
-	if ( taxonomy && termId ) {
+	if ( path === '/category' && termId ) {
 		return {
 			areas: {
 				content: <PageCategory />,
