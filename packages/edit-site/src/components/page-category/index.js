@@ -44,6 +44,7 @@ import {
 import { postRevisionsAction } from '../actions';
 import usePatternSettings from '../page-patterns/use-pattern-settings';
 import { unlock } from '../../lock-unlock';
+import { use } from '@wordpress/data';
 
 const { ExperimentalBlockEditorProvider, useGlobalStyle } = unlock(
 	blockEditorPrivateApis
@@ -61,11 +62,33 @@ export default function PageCategory() {
 		}
 	);
 	const history = useHistory();
+	const [ fields, setFields ] = useState( null );
+
+	// Make an OPTIONS request to /wp/v2/category/termId to get the list of available fields.
+	const { termId } = params;
+	useEffect( () => {
+		if ( termId ) {
+			fetch( `/wp-json/wp/v2/categories/${ termId }`, {
+				method: 'OPTIONS',
+			} ).then( async ( response ) => {
+				const data = await response.json();
+				setFields( data.schema?.properties );
+			} );
+		}
+	}, [ termId ] );
 
 	return (
-		<Page
-			className="edit-site-page-category"
-			title={ __( 'Category' ) }
-		></Page>
+		<Page className="edit-site-page-category" title={ __( 'Category' ) }>
+			Hello, category!
+			{ fields &&
+				Object.keys( fields ).map( ( key ) => {
+					const field = fields[ key ];
+					switch ( field.type ) {
+						case 'string':
+							return <input type="input" value={ 'foo' } />;
+					}
+					return <div key={ key }>{ fields[ key ].description }</div>;
+				} ) }
+		</Page>
 	);
 }
